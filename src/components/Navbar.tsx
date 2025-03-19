@@ -79,7 +79,7 @@ const MenuText = styled(ListItemText)({
 });
 
 const Navbar = () => {
-  const menuItems = ['ABOUT', 'PORTFOLIO', 'CONTACT'];
+  const menuItems = ['ABOUT', 'PORTFOLIO', 'TEAM', 'CONTACT'];
 
   return (
     <SidePanel>

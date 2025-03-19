@@ -7,6 +7,7 @@ import About from './pages/About';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 import ProjectDetail from './pages/ProjectDetail';
+import Team from './pages/Team';
 import './App.css';
 
 const theme = createTheme({
@@ -35,6 +36,7 @@ function App() {
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/project/:id" element={<ProjectDetail />} />
+            <Route path="/team" element={<Team />} />
           </Routes>
         </div>
       </Router>
