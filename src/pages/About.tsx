@@ -11,6 +11,7 @@ const AboutContent = styled(Typography)({
   marginBottom: '40px',
   fontSize: '1.2rem',
   lineHeight: 1.8,
+  textAlign: 'justify'
 });
 
 const CollaborationSection = styled(Box)({
@@ -45,7 +46,9 @@ const About = () => {
     'Aditya Bhardwaj',
     'Flyboy',
     'Jubin',
-    'Kushagra Thakur'
+    'Kushagra Thakur',
+    'Vichar',
+    'Urban Poet',
   ];
 
   return (
@@ -98,10 +101,15 @@ const About = () => {
           <Typography variant="h3" gutterBottom>
             Collaborations
           </Typography>
-          <Grid container justifyContent="center">
+          <Grid container justifyContent="center" spacing={4}>
             {collaborations.map((company) => (
               <Grid item key={company}>
-                <Typography variant="h6" component={motion.div} whileHover={{ scale: 1.1 }}>
+                <Typography 
+                  variant="h6" 
+                  component={motion.div} 
+                  whileHover={{ scale: 1.1 }}
+                  sx={{ mx: 2 }}
+                >
                   {company}
                 </Typography>
               </Grid>

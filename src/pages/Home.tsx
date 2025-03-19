@@ -76,6 +76,12 @@ const Home = () => {
       </HeroSection>
 
       <Container>
+        <Box sx={{ textAlign: 'center', mt: 8, mb: 4 }}>
+          <Typography variant="h3" component="h2" sx={{ mb: 2 }}>
+            Featured Projects
+          </Typography>
+          <Box sx={{ width: '60px', height: '4px', backgroundColor: '#000', margin: '0 auto', mb: 3 }} />
+        </Box>
         <PortfolioGrid container spacing={3}>
           {projects.map((project) => (
             <Grid item xs={12} sm={6} md={4} key={project.id}>
@@ -95,6 +101,21 @@ const Home = () => {
             </Grid>
           ))}
         </PortfolioGrid>
+        {/* <Box sx={{ textAlign: 'center', mt: 4, mb: 8 }}>
+          <Link to="/portfolio" style={{ textDecoration: 'none' }}>
+            <Typography 
+              variant="h6" 
+              sx={{ 
+                color: '#000',
+                '&:hover': {
+                  textDecoration: 'underline'
+                }
+              }}
+            >
+              View All Projects in Our Portfolio →
+            </Typography>
+          </Link>
+        </Box> */}
       </Container>
     </Box>
   );
