@@ -33,8 +33,11 @@ const SidePanel = styled(Box)(({ theme }) => ({
 const LogoContainer = styled(Box)({
   padding: '20px',
   marginBottom: '40px',
+  position: 'relative',
+  width: '100%',
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'center',
 });
 
 const Logo = styled(Typography)({

@@ -29,7 +29,7 @@ interface Project {
   date?: string;
   credits?: {
     director?: string;
-    producer?: string;
+    production?: string;
     cinematographer?: string;
     editor?: string;
   };
@@ -45,10 +45,9 @@ const projects: Project[] = [
     client: 'Sony Music India',
     date: '2023',
     credits: {
-      director: 'John Doe',
-      producer: 'Jane Smith',
-      cinematographer: 'Mike Johnson',
-      editor: 'Sarah Williams'
+      director: 'Divyansh Joshi',
+      production: "Rishabh Pandey, Abhimanyu Kochar, Sanjana Arya",
+      editor: 'Sumit Maurya'
     }
   },
   // Add more projects here
@@ -76,12 +75,13 @@ const ProjectDetail = () => {
     >
       <ProjectSection>
         <Container>
-          <BackButton
-            startIcon={<ArrowBackIcon />}
-            onClick={() => navigate(-1)}
-          >
-            Back to Portfolio
-          </BackButton>
+          
+            <BackButton
+              startIcon={<ArrowBackIcon />}
+              onClick={() => navigate('/portfolio')}
+            >
+              Back to Portfolio
+            </BackButton>
 
           <Typography variant="h2" component="h1" gutterBottom>
             {project.title}
