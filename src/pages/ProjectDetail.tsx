@@ -37,7 +37,7 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: 1,
+    id: 5,
     title: 'Dard e dil',
     category: 'Music Video',
     image: '/images/dard-e-dil.jpg',

@@ -10,16 +10,16 @@ interface TeamMember {
 
 const teamMembers: TeamMember[] = [
   {
-    name: "Rishabh Pandey",
-    role: "Founder & Executive Producer",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    imageUrl: "/images/rishabh-pandey.jpg" // You'll need to add this image to public/images
-  },
-  {
     name: "Divyansh Joshi",
     role: "Founder & Director",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Curabitur aliquet quam id dui posuere blandit. Nulla quis lorem ut libero malesuada feugenda. Nulla quis lorem ut libero malesuada feugenda.",
     imageUrl: "/images/divyansh-joshi.jpg" // You'll need to add this image to public/images
+  },
+  {
+    name: "Rishabh Pandey",
+    role: "Executive Producer",
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    imageUrl: "/images/rishabh-pandey.jpg" // You'll need to add this image to public/images
   }
 ];
 

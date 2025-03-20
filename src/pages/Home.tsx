@@ -46,10 +46,11 @@ const ProjectOverlay = styled(Box)({
 });
 
 const projects = [
-  { id: 1, title: 'Dard e dil', image: '/images/dard-e-dil.jpg' },
+  { id: 1, title: 'Mr. Rambo', image: '/images/rambo.jpg' },
   { id: 2, title: 'Battak', image: '/images/battak.jpg' },
   { id: 3, title: 'Ben 10', image: '/images/ben-10.jpg' },
   { id: 4, title: 'Heavy', image: '/images/heavy.jpg' },
+  { id: 5, title: 'Dard e dil', image: '/images/dard-e-dil.jpg' },
   // Add more projects here
 ];
 
