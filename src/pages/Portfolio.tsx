@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { Container, Grid, Typography, Box, Tabs, Tab } from '@mui/material';
+import React from 'react';
+import { Container, Grid, Typography, Box } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 const ProjectCard = styled(motion.div)({
   position: 'relative',
@@ -31,6 +32,11 @@ const ProjectOverlay = styled(Box)({
   color: '#fff',
 });
 
+const PortfolioSection = styled(Box)({
+  padding: '100px 0',
+  minHeight: 'calc(100vh - 200px)',
+});
+
 const projects = [
   { id: 1, title: 'Mr. Rambo', category: 'Music Video', image: '/images/rambo.jpg' },
   { id: 2, title: 'Battak', category: 'Music Video', image: '/images/battak.jpg' },
@@ -55,56 +61,37 @@ const projects = [
 ];
 
 const Portfolio = () => {
-  const [category, setCategory] = useState('all');
-
-  const handleCategoryChange = (event: React.SyntheticEvent, newValue: string) => {
-    setCategory(newValue);
-  };
-
-  const filteredProjects = category === 'all' 
-    ? projects 
-    : projects.filter(project => project.category.toLowerCase() === category);
-
   return (
-    <Box sx={{ pt: 10, pb: 8 }}>
-      <Container>
-        <Typography variant="h2" component="h1" gutterBottom align="center" sx={{ mb: 6 }}>
-          Our Work
-        </Typography>
+    <Box>
+      <PortfolioSection>
+        <Container>
+          <Typography variant="h2" component="h1" gutterBottom align="center" sx={{ mb: 6 }}>
+            Our Work
+          </Typography>
 
-        <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 4 }}>
-          <Tabs
-            value={category}
-            onChange={handleCategoryChange}
-            centered
-          >
-            <Tab label="All" value="all" />
-            <Tab label="Music Videos" value="music video" />
-            <Tab label="Commercials" value="commercial" />
-          </Tabs>
-        </Box>
-
-        <Grid container spacing={3}>
-          {filteredProjects.map((project) => (
-            <Grid item xs={12} sm={6} md={4} key={project.id}>
-              <Link to={`/project/${project.id}`} style={{ textDecoration: 'none' }}>
-                <ProjectCard
-                  whileHover={{ y: -10 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <ProjectImage src={project.image} alt={project.title} />
-                  <ProjectOverlay>
-                    <Typography variant="h6">{project.title}</Typography>
-                    <Typography variant="body2">{project.category}</Typography>
-                  </ProjectOverlay>
-                </ProjectCard>
-              </Link>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+          <Grid container spacing={3}>
+            {projects.map((project) => (
+              <Grid item xs={12} sm={6} md={4} key={project.id}>
+                <Link to={`/project/${project.id}`} style={{ textDecoration: 'none' }}>
+                  <ProjectCard
+                    whileHover={{ y: -10 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <ProjectImage src={project.image} alt={project.title} />
+                    <ProjectOverlay>
+                      <Typography variant="h6">{project.title}</Typography>
+                      <Typography variant="body2">{project.category}</Typography>
+                    </ProjectOverlay>
+                  </ProjectCard>
+                </Link>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </PortfolioSection>
+      <Footer />
     </Box>
   );
 };

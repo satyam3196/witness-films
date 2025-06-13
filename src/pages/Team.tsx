@@ -1,5 +1,22 @@
 import React from 'react';
-import styles from './Team.module.css';
+import { Container, Typography, Grid, Box, Card, CardMedia, CardContent } from '@mui/material';
+import { motion } from 'framer-motion';
+import { styled } from '@mui/material/styles';
+import Footer from '../components/Footer';
+
+const TeamSection = styled(Box)({
+  padding: '100px 0',
+  minHeight: 'calc(100vh - 200px)',
+});
+
+const TeamCard = styled(Card)({
+  maxWidth: 400,
+  margin: '0 auto',
+  transition: 'transform 0.3s ease',
+  '&:hover': {
+    transform: 'translateY(-5px)',
+  },
+});
 
 interface TeamMember {
   name: string;
@@ -25,27 +42,47 @@ const teamMembers: TeamMember[] = [
 
 const Team: React.FC = () => {
   return (
-    <div className={styles.teamContainer}>
-      <h1 className={styles.teamTitle}>Our Team</h1>
-      <div className={styles.teamGrid}>
-        {teamMembers.map((member, index) => (
-          <div key={index} className={styles.teamMember}>
-            <div className={styles.imageContainer}>
-              <img
-                src={member.imageUrl}
-                alt={member.name}
-                className={styles.memberImage}
-              />
-            </div>
-            <div className={styles.memberInfo}>
-              <h2 className={styles.memberName}>{member.name}</h2>
-              <h3 className={styles.memberRole}>{member.role}</h3>
-              <p className={styles.memberBio}>{member.bio}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    <Box>
+      <TeamSection>
+        <Container>
+          <Typography variant="h2" component="h1" gutterBottom align="center" sx={{ mb: 6 }}>
+            Our Team
+          </Typography>
+          <Grid container spacing={4} justifyContent="center">
+            {teamMembers.map((member, index) => (
+              <Grid item xs={12} sm={6} md={6} key={index}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                >
+                  <TeamCard>
+                    <CardMedia
+                      component="img"
+                      height="300"
+                      image={member.imageUrl}
+                      alt={member.name}
+                    />
+                    <CardContent sx={{ p: 3 }}>
+                      <Typography variant="h5" component="h2" gutterBottom>
+                        {member.name}
+                      </Typography>
+                      <Typography variant="h6" color="text.secondary" gutterBottom>
+                        {member.role}
+                      </Typography>
+                      <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+                        {member.bio}
+                      </Typography>
+                    </CardContent>
+                  </TeamCard>
+                </motion.div>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </TeamSection>
+      <Footer />
+    </Box>
   );
 };
 

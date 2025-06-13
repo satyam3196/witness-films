@@ -4,6 +4,7 @@ import { Container, Typography, Box, Button, Grid } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Footer from '../components/Footer';
 
 const ProjectSection = styled(Box)({
   padding: '100px 0',
@@ -144,6 +145,7 @@ const ProjectDetail = () => {
           </Grid>
         </Container>
       </ProjectSection>
+      <Footer />
     </motion.div>
   );
 };

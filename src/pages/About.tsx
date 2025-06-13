@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Typography, Grid, Box } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
+import Footer from '../components/Footer';
 
 const Section = styled(Box)({
   padding: '100px 0',
@@ -34,9 +35,10 @@ const About = () => {
   const collaborations = [
     'Sony Music India',
     'Desi Trill',
-    'Warner Music',
+    'Warner Music India',
     'T-Series',
-    'Zerodha'
+    'Zerodha',
+    'Mass Appeal'
   ];
 
   const artists = [
@@ -134,6 +136,7 @@ const About = () => {
           </Grid>
         </Container>
       </Section>
+      <Footer />
     </motion.div>
   );
 };
