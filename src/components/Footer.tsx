@@ -55,13 +55,13 @@ const Footer = () => {
               Contact Info
             </Typography>
             <Typography variant="body2" sx={{ color: '#ccc', mb: 1 }}>
-              Email: info@witnessfilms.com
+              Email: info@witness-films.com
             </Typography>
             <Typography variant="body2" sx={{ color: '#ccc', mb: 1 }}>
               Phone: +91 9627627886
             </Typography>
             <Typography variant="body2" sx={{ color: '#ccc' }}>
-              Location: Witness Films Studio, Jakhan, Dehradun, India
+              Location: Offgrid Studios, Jakhan, Dehradun, India
             </Typography>
           </Grid>
         </Grid>
@@ -72,7 +72,7 @@ const Footer = () => {
           textAlign: 'center' 
         }}>
           <Typography variant="body2" sx={{ color: '#ccc' }}>
-            © 2024 Witness Films. All rights reserved.
+            © 2021 Witness-Films. All rights reserved.
           </Typography>
         </Box>
       </Container>

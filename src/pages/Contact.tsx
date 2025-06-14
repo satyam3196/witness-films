@@ -127,7 +127,7 @@ const Contact = () => {
                   </Typography>
                   <Typography variant="body1">
                     <strong>Address:</strong><br />
-                    Witness Films Studio, Jakhan, Dehradun, India
+                    Offgrid Studios, Jakhan, Dehradun, India
                   </Typography>
                 </Box>
               </ContactInfo>
@@ -186,7 +186,7 @@ const Contact = () => {
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.8234567891!2d78.0663120!3d30.3634370!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDIxJzQ4LjQiTiA3OMKwMDQnMDkuNSJF!5e0!3m2!1sen!2sin!4v1647856687721!5m2!1sen!2sin"
                   allowFullScreen
                   loading="lazy"
-                  title="Witness Films Studio - Jakhan, Dehradun, India"
+                  title="Offgrid Studios - Jakhan, Dehradun, India"
                 />
               </Box>
             </Grid>

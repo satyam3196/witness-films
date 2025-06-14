@@ -79,7 +79,7 @@ const MenuText = styled(ListItemText)({
 });
 
 const Navbar = () => {
-  const menuItems = ['ABOUT', 'PORTFOLIO', 'TEAM', 'CONTACT'];
+  const menuItems = ['HOME','ABOUT', 'PORTFOLIO', 'TEAM', 'CONTACT'];
 
   return (
     <SidePanel>
@@ -92,7 +92,7 @@ const Navbar = () => {
         </HamburgerButton>
         <Link to="/" style={{ textDecoration: 'none' }}>
           <Logo variant="h6" className="logo-text">
-            WITNESS FILMS
+            WITNESS-FILMS
           </Logo>
         </Link>
       </LogoContainer>
@@ -101,7 +101,7 @@ const Navbar = () => {
         {menuItems.map((item) => (
           <Link 
             key={item} 
-            to={`/${item.toLowerCase()}`} 
+            to={item === 'HOME' ? '/' : `/${item.toLowerCase()}`} 
             style={{ textDecoration: 'none' }}
           >
             <StyledListItem>

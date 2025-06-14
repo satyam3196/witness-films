@@ -77,11 +77,12 @@ const ColabOverlay = styled(Box)({
 
 
 const projects = [
-  { id: 1, title: 'Mr. Rambo', image: '/images/rambo.jpg' },
-  { id: 2, title: 'Battak', image: '/images/battak.jpg' },
-  { id: 3, title: 'Ben 10', image: '/images/ben-10.jpg' },
-  { id: 4, title: 'Heavy', image: '/images/heavy.jpg' },
-  { id: 5, title: 'Dard e dil', image: '/images/dard-e-dil.jpg' },
+  { id: 1, title: 'Top Boys', category: 'Music Video', image: '/images/top_boys.jpg' },
+  { id: 3, title: 'Mr. Rambo', image: '/images/rambo.jpg' },
+  { id: 4, title: 'Battak', image: '/images/battak.jpg' },
+  { id: 5, title: 'Ben 10', image: '/images/ben-10.jpg' },
+  { id: 6, title: 'Heavy', image: '/images/heavy.jpg' },
+  { id: 7, title: 'Dard e dil', image: '/images/dard-e-dil.jpg' },
   // Add more projects here
 ];
 
@@ -89,7 +90,7 @@ const colabs = [
   { id: 1, title: 'Sony Music India', image: '/images/sony_music1.jpg' },
   { id: 2, title: 'Warner Music India', image: '/images/warner_music.jpg' },
   { id: 3, title: 'Mass Appeal', image: '/images/mass_appeal.jpg' },
-  { id: 4, title: 'Desi Trill', image: '/images/desi_trill.jpg' },
+  { id: 4, title: 'T-Series', image: '/images/t-series.png' },
 ];
 
 const Home = () => {
@@ -102,7 +103,7 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            WITNESS FILMS
+            WITNESS-FILMS
           </Typography>
           <Typography variant="h4" component={motion.h4}
             initial={{ opacity: 0, y: 20 }}
