@@ -2,6 +2,7 @@
   "name": "witness-films",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://witness-films.com",
   
   "dependencies": {
     "@emotion/react": "^11.11.0",
