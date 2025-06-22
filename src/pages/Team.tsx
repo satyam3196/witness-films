@@ -10,18 +10,19 @@ const TeamSection = styled(Box)({
 });
 
 const TeamCard = styled(Card)({
-  maxWidth: 400,
+  maxWidth: 350,
   margin: '0 auto',
   transition: 'transform 0.3s ease',
+  borderRadius: '12px',
+  overflow: 'hidden',
   '&:hover': {
-    transform: 'translateY(-5px)',
+    transform: 'translateY(-8px)',
   },
 });
 
 interface TeamMember {
   name: string;
   role: string;
-  bio: string;
   imageUrl: string;
 }
 
@@ -29,14 +30,22 @@ const teamMembers: TeamMember[] = [
   {
     name: "Divyansh Joshi",
     role: "Founder & Director",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Curabitur aliquet quam id dui posuere blandit. Nulla quis lorem ut libero malesuada feugenda. Nulla quis lorem ut libero malesuada feugenda.",
-    imageUrl: "/images/divyansh-joshi.jpg" // You'll need to add this image to public/images
+    imageUrl: "/images/dj.jpg"
   },
   {
     name: "Rishabh Pandey",
     role: "Executive Producer",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    imageUrl: "/images/rishabh-pandey.jpg" // You'll need to add this image to public/images
+    imageUrl: "/images/pandu.jpg"
+  },
+  {
+    name: "Tushar Gupta",
+    role: "Director of Photography",
+    imageUrl: "/images/tushar.jpg"
+  },
+  {
+    name: "Shubham Sharma",
+    role: "Creative Director",
+    imageUrl: "/images/shubham.jpg"
   }
 ];
 
@@ -45,33 +54,31 @@ const Team: React.FC = () => {
     <Box>
       <TeamSection>
         <Container>
-          <Typography variant="h2" component="h1" gutterBottom align="center" sx={{ mb: 6 }}>
+          <Typography variant="h2" component="h1" gutterBottom align="center" sx={{ mb: 8 }}>
             Our Team
           </Typography>
-          <Grid container spacing={4} justifyContent="center">
+          <Grid container spacing={4} justifyContent="center" maxWidth="800px" sx={{ margin: '0 auto' }}>
             {teamMembers.map((member, index) => (
-              <Grid item xs={12} sm={6} md={6} key={index}>
+              <Grid item xs={12} sm={6} key={index}>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <TeamCard>
                     <CardMedia
                       component="img"
-                      height="300"
+                      height="350"
                       image={member.imageUrl}
                       alt={member.name}
+                      sx={{ objectFit: 'cover' }}
                     />
-                    <CardContent sx={{ p: 3 }}>
-                      <Typography variant="h5" component="h2" gutterBottom>
+                    <CardContent sx={{ p: 3, textAlign: 'center' }}>
+                      <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 'bold' }}>
                         {member.name}
                       </Typography>
-                      <Typography variant="h6" color="text.secondary" gutterBottom>
+                      <Typography variant="h6" color="text.secondary">
                         {member.role}
-                      </Typography>
-                      <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-                        {member.bio}
                       </Typography>
                     </CardContent>
                   </TeamCard>

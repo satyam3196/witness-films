@@ -123,7 +123,7 @@ const Contact = () => {
                     <strong>Email:</strong> info@witnessfilms.com
                   </Typography>
                   <Typography variant="body1" paragraph>
-                    <strong>Phone:</strong> +91 9627627886
+                    <strong>Phone:</strong> +91-9627627886
                   </Typography>
                   <Typography variant="body1">
                     <strong>Address:</strong><br />
