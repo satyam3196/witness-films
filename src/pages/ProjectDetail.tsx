@@ -1,44 +1,84 @@
-import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Container, Typography, Box, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Footer from '../components/Footer';
 
-const ProjectSection = styled(Box)({
+const ProjectSection = styled(Box)(({ theme }) => ({
   padding: '100px 0',
   minHeight: '80vh',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-});
+  [theme.breakpoints.down('md')]: {
+    padding: '80px 0',
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '60px 0',
+  },
+}));
 
-const BackButton = styled(Button)({
-  position: 'fixed',
-  top: '20px',
-  left: '20px',
-  zIndex: 1000,
-  backgroundColor: 'rgba(0, 0, 0, 0.7)',
+const BackButtonContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '40px',
+  marginBottom: '40px',
+  [theme.breakpoints.down('sm')]: {
+    marginTop: '30px',
+    marginBottom: '30px',
+  },
+}));
+
+const BackButton = styled(Button)(({ theme }) => ({
+  backgroundColor: 'rgba(0, 0, 0, 0.8)',
   color: 'white',
+  padding: '12px 24px',
+  fontSize: '1rem',
+  borderRadius: '8px',
   '&:hover': {
     backgroundColor: 'rgba(0, 0, 0, 0.9)',
   },
-});
+  [theme.breakpoints.down('sm')]: {
+    padding: '10px 20px',
+    fontSize: '0.9rem',
+  },
+}));
 
-const YouTubeEmbed = styled('iframe')({
+const YouTubeEmbed = styled('iframe')(({ theme }) => ({
   width: '100%',
   maxWidth: '1200px',
   height: '675px', // 16:9 aspect ratio for larger size
   borderRadius: '8px',
   border: 'none',
-  '@media (max-width: 768px)': {
-    height: '400px',
+  [theme.breakpoints.down('md')]: {
+    height: '500px',
   },
-  '@media (max-width: 480px)': {
+  [theme.breakpoints.down('sm')]: {
     height: '300px',
   },
-});
+  [theme.breakpoints.down('xs')]: {
+    height: '250px',
+  },
+}));
+
+const ProjectTitle = styled(Typography)(({ theme }) => ({
+  textAlign: 'center',
+  marginBottom: '40px',
+  fontWeight: 'bold',
+  letterSpacing: '2px',
+  [theme.breakpoints.down('md')]: {
+    fontSize: '3rem',
+    marginBottom: '30px',
+    letterSpacing: '1px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '2rem',
+    marginBottom: '20px',
+    letterSpacing: '0.5px',
+  },
+}));
 
 interface Project {
   id: number;
@@ -173,8 +213,23 @@ const projects: Project[] = [
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   
   const project = projects.find(p => p.id === Number(id));
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleBackClick = () => {
+    // Go back to previous page, or default to portfolio if no history
+    if (location.key !== 'default') {
+      navigate(-1);
+    } else {
+      navigate('/portfolio');
+    }
+  };
 
   if (!project) {
     return (
@@ -190,29 +245,11 @@ const ProjectDetail = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
-      <Box sx={{ textAlign: 'right' }}>
-        <BackButton
-          startIcon={<ArrowBackIcon />}
-          onClick={() => navigate('/portfolio')}
-        >
-          Back to Portfolio
-        </BackButton>
-      </Box>
-
       <ProjectSection>
         <Container>
-          <Typography 
-            variant="h1" 
-            component="h1"
-            sx={{
-              textAlign: 'center',
-              marginBottom: '40px',
-              fontWeight: 'bold',
-              letterSpacing: '2px',
-            }}
-          >
+          <ProjectTitle variant="h1">
             {project.title}
-          </Typography>
+          </ProjectTitle>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -227,6 +264,16 @@ const ProjectDetail = () => {
               allowFullScreen
             />
           </motion.div>
+
+          {/* Back Button Below Video */}
+          <BackButtonContainer>
+            <BackButton
+              startIcon={<ArrowBackIcon />}
+              onClick={handleBackClick}
+            >
+              Back
+            </BackButton>
+          </BackButtonContainer>
         </Container>
       </ProjectSection>
       <Footer />

@@ -1,44 +1,146 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Typography, Grid, Box } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
 import Footer from '../components/Footer';
 
-const Section = styled(Box)({
+const Section = styled(Box)(({ theme }) => ({
   padding: '100px 0',
-});
+  [theme.breakpoints.down('md')]: {
+    padding: '80px 0',
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '60px 0',
+  },
+}));
 
-const AboutContent = styled(Typography)({
+const AboutContent = styled(Typography)(({ theme }) => ({
   marginBottom: '40px',
   fontSize: '1.2rem',
   lineHeight: 1.8,
-  textAlign: 'justify'
-});
+  textAlign: 'justify',
+  [theme.breakpoints.down('md')]: {
+    fontSize: '1.1rem',
+    marginBottom: '30px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1rem',
+    marginBottom: '20px',
+    textAlign: 'left',
+  },
+}));
 
-const CollaborationSection = styled(Box)({
+const CollaborationSection = styled(Box)(({ theme }) => ({
   backgroundColor: '#f5f5f5',
   padding: '60px 0',
+  [theme.breakpoints.down('md')]: {
+    padding: '50px 0',
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '40px 0',
+  },
+}));
+
+const ServiceCard = styled(Box)(({ theme }) => ({
+  padding: '24px',
+  backgroundColor: 'white',
+  borderRadius: '8px',
+  height: '100%',
+  boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+  transition: 'transform 0.3s ease',
+  '&:hover': {
+    transform: 'translateY(-4px)',
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '20px',
+    marginBottom: '16px',
+  },
+}));
+
+const PageTitle = styled(Typography)(({ theme }) => ({
+  marginBottom: '2rem',
+  [theme.breakpoints.down('md')]: {
+    fontSize: '2.5rem',
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '2rem',
+    marginBottom: '1.5rem',
+  },
+}));
+
+const SectionTitle = styled(Typography)(({ theme }) => ({
+  marginBottom: '2rem',
+  [theme.breakpoints.down('md')]: {
+    fontSize: '2rem',
+    marginBottom: '1.5rem',
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.75rem',
+    marginBottom: '1rem',
+  },
+}));
+
+const ColabCard = styled(motion.div)(({ theme }) => ({
+  position: 'relative',
+  height: '200px',
+  overflow: 'hidden',
+  cursor: 'pointer',
+  borderRadius: '8px',
+  [theme.breakpoints.down('md')]: {
+    height: '180px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    height: '150px',
+    marginBottom: '16px',
+  },
+  '&:hover img': {
+    transform: 'scale(1.05)',
+  },
+}));
+
+const ColabImage = styled('img')({
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  transition: 'transform 0.3s ease',
 });
 
-const CollaborationLogo = styled('img')({
-  maxWidth: '150px',
-  height: 'auto',
-  margin: '20px',
-  filter: 'grayscale(100%)',
-  transition: 'filter 0.3s ease',
-  '&:hover': {
-    filter: 'grayscale(0%)',
+const ColabOverlay = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  right: 0,
+  padding: '15px',
+  background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
+  color: '#fff',
+  [theme.breakpoints.down('sm')]: {
+    padding: '12px',
   },
-});
+}));
+
+const ArtistItem = styled(Typography)(({ theme }) => ({
+  padding: '12px',
+  backgroundColor: '#f8f9fa',
+  borderRadius: '8px',
+  textAlign: 'center',
+  transition: 'background-color 0.3s ease',
+  '&:hover': {
+    backgroundColor: '#e9ecef',
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '10px',
+    fontSize: '0.95rem',
+  },
+}));
 
 const About = () => {
   const collaborations = [
-    'Sony Music India',
-    'Desi Trill',
-    'Warner Music India',
-    'T-Series',
-    'Zerodha',
-    'Mass Appeal'
+    { id: 1, title: 'Sony Music India', image: '/images/sony_music1.jpg' },
+    { id: 2, title: 'T-Series', image: '/images/t-series.png' },
+    { id: 3, title: 'Warner Music India', image: '/images/warner_music.jpg' },
+    { id: 4, title: 'Desi Trill', image: '/images/desi_trill.jpg' },
+    { id: 5, title: 'Mass Appeal', image: '/images/mass_appeal.jpg' },
+    { id: 6, title: 'Zerodha', image: '/images/zerodha.png' },
   ];
 
   const artists = [
@@ -53,6 +155,13 @@ const About = () => {
     'Urban Poet',
   ];
 
+  const services = ['Concept Development', 'Filming', 'Editing', 'Post Production', 'Marketing'];
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -61,9 +170,9 @@ const About = () => {
     >
       <Section>
         <Container>
-          <Typography variant="h2" component="h1" gutterBottom>
+          <PageTitle variant="h2">
             About Us
-          </Typography>
+          </PageTitle>
           <AboutContent>
             At Witness Films, we are passionate storytellers dedicated to transforming musical visions into captivating visual narratives. Based in Dehradun, India, our team of seasoned professionals specializes in crafting high-quality music videos that resonate with audiences and amplify the essence of your artistry.
           </AboutContent>
@@ -75,23 +184,28 @@ const About = () => {
 
       <CollaborationSection>
         <Container>
-          <Typography variant="h3" gutterBottom>
+          <SectionTitle variant="h3">
             Our Services
-          </Typography>
-          <Grid container spacing={4}>
-            {['Concept Development', 'Filming', 'Editing', 'Post Production', 'Marketing'].map((service) => (
+          </SectionTitle>
+          <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
+            {services.map((service) => (
               <Grid item xs={12} sm={6} md={4} key={service}>
-                <Box
-                  component={motion.div}
+                <motion.div
                   whileHover={{ scale: 1.05 }}
-                  p={3}
-                  bgcolor="white"
-                  borderRadius={2}
+                  transition={{ duration: 0.2 }}
                 >
-                  <Typography variant="h5" gutterBottom>
-                    {service}
-                  </Typography>
-                </Box>
+                  <ServiceCard>
+                    <Typography 
+                      variant="h5" 
+                      sx={{ 
+                        fontWeight: 'bold',
+                        fontSize: { xs: '1.25rem', sm: '1.5rem' }
+                      }}
+                    >
+                      {service}
+                    </Typography>
+                  </ServiceCard>
+                </motion.div>
               </Grid>
             ))}
           </Grid>
@@ -100,20 +214,28 @@ const About = () => {
 
       <Section>
         <Container>
-          <Typography variant="h3" gutterBottom>
+          <SectionTitle variant="h3">
             Collaborations
-          </Typography>
-          <Grid container justifyContent="center" spacing={4}>
-            {collaborations.map((company) => (
-              <Grid item key={company}>
-                <Typography 
-                  variant="h6" 
-                  component={motion.div} 
-                  whileHover={{ scale: 1.1 }}
-                  sx={{ mx: 2 }}
+          </SectionTitle>
+          <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} justifyContent="center">
+            {collaborations.map((colab) => (
+              <Grid item xs={12} sm={6} md={4} key={colab.id}>
+                <ColabCard
+                  whileHover={{ y: -10 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 * colab.id }}
                 >
-                  {company}
-                </Typography>
+                  <ColabImage src={colab.image} alt={colab.title} />
+                  <ColabOverlay>
+                    <Typography 
+                      variant="h6" 
+                      sx={{ fontSize: { xs: '0.9rem', sm: '1rem', md: '1.1rem' } }}
+                    >
+                      {colab.title}
+                    </Typography>
+                  </ColabOverlay>
+                </ColabCard>
               </Grid>
             ))}
           </Grid>
@@ -122,15 +244,20 @@ const About = () => {
 
       <Section>
         <Container>
-          <Typography variant="h3" gutterBottom>
+          <SectionTitle variant="h3">
             Artists We've Worked With
-          </Typography>
-          <Grid container spacing={3}>
+          </SectionTitle>
+          <Grid container spacing={{ xs: 2, sm: 3, md: 3 }}>
             {artists.map((artist) => (
               <Grid item xs={12} sm={6} md={4} key={artist}>
-                <Typography variant="h6" component={motion.div} whileHover={{ scale: 1.1 }}>
-                  {artist}
-                </Typography>
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ArtistItem variant="h6">
+                    {artist}
+                  </ArtistItem>
+                </motion.div>
               </Grid>
             ))}
           </Grid>

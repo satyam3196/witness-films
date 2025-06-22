@@ -1,24 +1,74 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Typography, Grid, Box, Card, CardMedia, CardContent } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
 import Footer from '../components/Footer';
 
-const TeamSection = styled(Box)({
+const TeamSection = styled(Box)(({ theme }) => ({
   padding: '100px 0',
   minHeight: 'calc(100vh - 200px)',
-});
+  [theme.breakpoints.down('md')]: {
+    padding: '80px 0',
+    minHeight: 'auto',
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '60px 0',
+  },
+}));
 
-const TeamCard = styled(Card)({
-  maxWidth: 350,
+const TeamCard = styled(Card)(({ theme }) => ({
+  maxWidth: 400,
   margin: '0 auto',
   transition: 'transform 0.3s ease',
   borderRadius: '12px',
   overflow: 'hidden',
+  [theme.breakpoints.down('md')]: {
+    maxWidth: 350,
+  },
+  [theme.breakpoints.down('sm')]: {
+    maxWidth: '100%',
+    marginBottom: '24px',
+  },
   '&:hover': {
     transform: 'translateY(-8px)',
   },
-});
+}));
+
+const PageTitle = styled(Typography)(({ theme }) => ({
+  marginBottom: '8rem',
+  [theme.breakpoints.down('md')]: {
+    fontSize: '2.5rem',
+    marginBottom: '6rem',
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '2rem',
+    marginBottom: '4rem',
+  },
+}));
+
+const TeamGrid = styled(Grid)(({ theme }) => ({
+  maxWidth: '2000px',                        //important
+  margin: '0 auto',
+  [theme.breakpoints.down('md')]: {
+    maxWidth: '600px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    maxWidth: '100%',
+  },
+}));
+
+const MemberName = styled(Typography)(({ theme }) => ({
+  fontWeight: 'bold',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.25rem',
+  },
+}));
+
+const MemberRole = styled(Typography)(({ theme }) => ({
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1rem',
+  },
+}));
 
 interface TeamMember {
   name: string;
@@ -50,16 +100,21 @@ const teamMembers: TeamMember[] = [
 ];
 
 const Team: React.FC = () => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Box>
       <TeamSection>
         <Container>
-          <Typography variant="h2" component="h1" gutterBottom align="center" sx={{ mb: 8 }}>
+          <PageTitle variant="h2" align="center">
             Our Team
-          </Typography>
-          <Grid container spacing={4} justifyContent="center" maxWidth="800px" sx={{ margin: '0 auto' }}>
+          </PageTitle>
+          <TeamGrid container spacing={{ xs: 3, sm: 3, md: 2 }} justifyContent="center">
             {teamMembers.map((member, index) => (
-              <Grid item xs={12} sm={6} key={index}>
+              <Grid item xs={12} sm={6} md={6} key={index}>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -71,21 +126,27 @@ const Team: React.FC = () => {
                       height="350"
                       image={member.imageUrl}
                       alt={member.name}
-                      sx={{ objectFit: 'cover' }}
+                      sx={{ 
+                        objectFit: 'cover',
+                        height: { xs: 300, sm: 350 }
+                      }}
                     />
-                    <CardContent sx={{ p: 3, textAlign: 'center' }}>
-                      <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 'bold' }}>
+                    <CardContent sx={{ 
+                      p: { xs: 2, sm: 3 }, 
+                      textAlign: 'center'
+                    }}>
+                      <MemberName variant="h5" gutterBottom>
                         {member.name}
-                      </Typography>
-                      <Typography variant="h6" color="text.secondary">
+                      </MemberName>
+                      <MemberRole variant="h6" color="text.secondary">
                         {member.role}
-                      </Typography>
+                      </MemberRole>
                     </CardContent>
                   </TeamCard>
                 </motion.div>
               </Grid>
             ))}
-          </Grid>
+          </TeamGrid>
         </Container>
       </TeamSection>
       <Footer />

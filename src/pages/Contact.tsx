@@ -1,29 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Typography, Grid, Box, TextField, Button, Alert, Snackbar } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
 import Footer from '../components/Footer';
 
-const ContactSection = styled(Box)({
+const ContactSection = styled(Box)(({ theme }) => ({
   padding: '100px 0',
-});
+  [theme.breakpoints.down('md')]: {
+    padding: '80px 0',
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '60px 0',
+  },
+}));
 
-const ContactInfo = styled(Box)({
+const ContactInfo = styled(Box)(({ theme }) => ({
   marginBottom: '40px',
-});
-
-const ContactForm = styled('form')({
-  '& .MuiTextField-root': {
+  [theme.breakpoints.down('md')]: {
+    marginBottom: '30px',
+  },
+  [theme.breakpoints.down('sm')]: {
     marginBottom: '20px',
   },
-});
+}));
 
-const LocationMap = styled('iframe')({
+const ContactForm = styled('form')(({ theme }) => ({
+  '& .MuiTextField-root': {
+    marginBottom: '20px',
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: '16px',
+    },
+  },
+}));
+
+const LocationMap = styled('iframe')(({ theme }) => ({
   width: '100%',
   height: '400px',
   border: 0,
   borderRadius: '4px',
-});
+  [theme.breakpoints.down('md')]: {
+    height: '350px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    height: '300px',
+    marginTop: '20px',
+  },
+}));
+
+const PageTitle = styled(Typography)(({ theme }) => ({
+  marginBottom: '3rem',
+  [theme.breakpoints.down('md')]: {
+    fontSize: '2.5rem',
+    marginBottom: '2.5rem',
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '2rem',
+    marginBottom: '2rem',
+  },
+}));
+
+const InfoTitle = styled(Typography)(({ theme }) => ({
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.25rem',
+  },
+}));
+
+const InfoText = styled(Typography)(({ theme }) => ({
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.95rem',
+  },
+}));
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -38,6 +84,11 @@ const Contact = () => {
     message: '',
     severity: 'success' as 'success' | 'error'
   });
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -105,30 +156,30 @@ const Contact = () => {
     >
       <ContactSection>
         <Container>
-          <Typography variant="h2" component="h1" gutterBottom align="center">
+          <PageTitle variant="h2" align="center">
             Contact Us
-          </Typography>
+          </PageTitle>
 
-          <Grid container spacing={6}>
+          <Grid container spacing={{ xs: 4, md: 6 }}>
             <Grid item xs={12} md={6}>
               <ContactInfo>
-                <Typography variant="h5" gutterBottom>
+                <InfoTitle variant="h5" gutterBottom>
                   Get in Touch
-                </Typography>
-                <Typography variant="body1" paragraph>
+                </InfoTitle>
+                <InfoText variant="body1" paragraph>
                   We'd love to hear from you. Whether you're looking to create a music video, collaborate on a project, or just want to say hello, we're here to help.
-                </Typography>
-                <Box sx={{ my: 4 }}>
-                  <Typography variant="body1" paragraph>
+                </InfoText>
+                <Box sx={{ my: { xs: 3, md: 4 } }}>
+                  <InfoText variant="body1" paragraph>
                     <strong>Email:</strong> info@witnessfilms.com
-                  </Typography>
-                  <Typography variant="body1" paragraph>
+                  </InfoText>
+                  <InfoText variant="body1" paragraph>
                     <strong>Phone:</strong> +91-9627627886
-                  </Typography>
-                  <Typography variant="body1">
+                  </InfoText>
+                  <InfoText variant="body1">
                     <strong>Address:</strong><br />
                     Offgrid Studios, Jakhan, Dehradun, India
-                  </Typography>
+                  </InfoText>
                 </Box>
               </ContactInfo>
 
@@ -140,6 +191,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  size="medium"
                 />
                 <TextField
                   fullWidth
@@ -149,6 +201,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  size="medium"
                 />
                 <TextField
                   fullWidth
@@ -157,6 +210,7 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
+                  size="medium"
                 />
                 <TextField
                   fullWidth
@@ -173,7 +227,12 @@ const Contact = () => {
                   type="submit"
                   size="large"
                   disabled={isSubmitting}
-                  sx={{ mt: 2 }}
+                  sx={{ 
+                    mt: 2,
+                    py: { xs: 1.5, sm: 2 },
+                    px: { xs: 3, sm: 4 },
+                    fontSize: { xs: '0.9rem', sm: '1rem' }
+                  }}
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </Button>
@@ -181,7 +240,7 @@ const Contact = () => {
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <Box sx={{ height: '100%', minHeight: '400px' }}>
+              <Box sx={{ height: '100%', minHeight: { xs: '300px', md: '400px' } }}>
                 <LocationMap
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.8234567891!2d78.0663120!3d30.3634370!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDIxJzQ4LjQiTiA3OMKwMDQnMDkuNSJF!5e0!3m2!1sen!2sin!4v1647856687721!5m2!1sen!2sin"
                   allowFullScreen

@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Grid, Typography, Box } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 
-const ProjectCard = styled(motion.div)({
+const ProjectCard = styled(motion.div)(({ theme }) => ({
   position: 'relative',
   height: '400px',
   overflow: 'hidden',
   cursor: 'pointer',
+  borderRadius: '8px',
+  [theme.breakpoints.down('md')]: {
+    height: '300px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    height: '250px',
+    marginBottom: '16px',
+  },
   '&:hover img': {
     transform: 'scale(1.05)',
   },
-});
+}));
 
 const ProjectImage = styled('img')({
   width: '100%',
@@ -22,7 +30,7 @@ const ProjectImage = styled('img')({
   transition: 'transform 0.3s ease',
 });
 
-const ProjectOverlay = styled(Box)({
+const ProjectOverlay = styled(Box)(({ theme }) => ({
   position: 'absolute',
   bottom: 0,
   left: 0,
@@ -30,12 +38,34 @@ const ProjectOverlay = styled(Box)({
   padding: '20px',
   background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
   color: '#fff',
-});
+  [theme.breakpoints.down('sm')]: {
+    padding: '15px',
+  },
+}));
 
-const PortfolioSection = styled(Box)({
+const PortfolioSection = styled(Box)(({ theme }) => ({
   padding: '100px 0',
   minHeight: 'calc(100vh - 200px)',
-});
+  [theme.breakpoints.down('md')]: {
+    padding: '80px 0',
+    minHeight: 'auto',
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '60px 0',
+  },
+}));
+
+const PageTitle = styled(Typography)(({ theme }) => ({
+  marginBottom: '6rem',
+  [theme.breakpoints.down('md')]: {
+    fontSize: '2.5rem',
+    marginBottom: '4rem',
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '2rem',
+    marginBottom: '3rem',
+  },
+}));
 
 const projects = [
   { id: 1, title: 'Don\'t Reckon', category: 'Music Video', image: '/images/dont_reckon.jpg' },
@@ -65,15 +95,20 @@ const projects = [
 ];
 
 const Portfolio = () => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Box>
       <PortfolioSection>
         <Container>
-          <Typography variant="h2" component="h1" gutterBottom align="center" sx={{ mb: 6 }}>
+          <PageTitle variant="h2" align="center">
             Our Work
-          </Typography>
+          </PageTitle>
 
-          <Grid container spacing={3}>
+          <Grid container spacing={{ xs: 2, sm: 3, md: 3 }}>
             {projects.map((project) => (
               <Grid item xs={12} sm={6} md={4} key={project.id}>
                 <Link to={`/project/${project.id}`} style={{ textDecoration: 'none' }}>
@@ -85,8 +120,18 @@ const Portfolio = () => {
                   >
                     <ProjectImage src={project.image} alt={project.title} />
                     <ProjectOverlay>
-                      <Typography variant="h6">{project.title}</Typography>
-                      <Typography variant="body2">{project.category}</Typography>
+                      <Typography 
+                        variant="h6" 
+                        sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}
+                      >
+                        {project.title}
+                      </Typography>
+                      <Typography 
+                        variant="body2" 
+                        sx={{ fontSize: { xs: '0.8rem', sm: '0.875rem' } }}
+                      >
+                        {project.category}
+                      </Typography>
                     </ProjectOverlay>
                   </ProjectCard>
                 </Link>

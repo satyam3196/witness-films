@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  overflow-x: hidden;
 }
 
 .App-logo {
@@ -34,5 +35,25 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .App {
+    padding-left: 0;
+  }
+  
+  /* Ensure content doesn't go under mobile navbar */
+  .App > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .App-header {
+    font-size: calc(8px + 2vmin);
   }
 }
