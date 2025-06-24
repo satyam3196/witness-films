@@ -127,7 +127,7 @@ const Footer = () => {
                   </SocialButton>
                 </a>
                 <a 
-                  href="#" 
+                  href="https://www.youtube.com/@witnessfilms8163" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   style={{ textDecoration: 'none' }}
