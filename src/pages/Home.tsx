@@ -182,16 +182,17 @@ const projects = [
   { id: 3, title: 'Mr. Rambo', image: '/images/rambo.jpg' },
   { id: 4, title: 'Battak', image: '/images/battak.jpg' },
   { id: 5, title: 'Ben 10', image: '/images/ben-10.jpg' },
-  { id: 6, title: 'Shiv Kailasho Ke Vasi', image: '/images/shiv-kailasho.jpg' },
+  { id: 8, title: 'Dard e dil', image: '/images/dard-e-dil.jpg' },
   //{ id: 7, title: 'Heavy', image: '/images/heavy.jpg' },
   // Add more projects here
 ];
 
 const colabs = [
-  { id: 1, title: 'Sony Music India', image: '/images/sony_music1.jpg' },
-  { id: 2, title: 'Warner Music India', image: '/images/warner_music.jpg' },
-  { id: 3, title: 'Mass Appeal', image: '/images/mass_appeal.jpg' },
-  { id: 4, title: 'T-Series', image: '/images/t-series.png' },
+  { id: 1, title: 'Sony Music India', image: '/images/sony_music.jpg' },
+  { id: 2, title: 'Universal Music Group', image: '/images/universal_music.jpg' },
+  { id: 3, title: 'Warner Music India', image: '/images/warner_music.jpg' },
+  { id: 4, title: 'Mass Appeal', image: '/images/mass_appeal.jpg' },
+  //{ id: 4, title: 'T-Series', image: '/images/t-series.png' },
 ];
 
 const Home = () => {

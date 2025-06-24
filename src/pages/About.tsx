@@ -135,11 +135,11 @@ const ArtistItem = styled(Typography)(({ theme }) => ({
 
 const About = () => {
   const collaborations = [
-    { id: 1, title: 'Sony Music India', image: '/images/sony_music1.jpg' },
-    { id: 2, title: 'T-Series', image: '/images/t-series.png' },
+    { id: 1, title: 'Sony Music India', image: '/images/sony_music.jpg' },
+    { id: 2, title: 'Universal Music Group', image: '/images/universal_music.jpg' },
     { id: 3, title: 'Warner Music India', image: '/images/warner_music.jpg' },
-    { id: 4, title: 'Desi Trill', image: '/images/desi_trill.jpg' },
-    { id: 5, title: 'Mass Appeal', image: '/images/mass_appeal.jpg' },
+    { id: 4, title: 'Mass Appeal', image: '/images/mass_appeal.jpg' },
+    { id: 5, title: 'Desi Trill', image: '/images/desi_trill.jpg' },
     { id: 6, title: 'Zerodha', image: '/images/zerodha.png' },
   ];
 
@@ -174,7 +174,7 @@ const About = () => {
             About Us
           </PageTitle>
           <AboutContent>
-            At Witness Films, we are passionate storytellers dedicated to transforming musical visions into captivating visual narratives. Based in Dehradun, India, our team of seasoned professionals specializes in crafting high-quality music videos that resonate with audiences and amplify the essence of your artistry.
+            At Witness-Films, we are passionate storytellers dedicated to transforming musical visions into captivating visual narratives. Based in Dehradun, India, our team of seasoned professionals specializes in crafting high-quality music videos that resonate with audiences and amplify the essence of your artistry.
           </AboutContent>
           <AboutContent>
             With a deep understanding of the dynamic Indian music landscape, we collaborate closely with artists across genres to produce visually stunning and conceptually compelling music videos. Our comprehensive services encompass every stage of production, from conceptualization and storyboarding to filming, editing, and post-production.

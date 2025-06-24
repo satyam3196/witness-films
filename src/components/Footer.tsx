@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Container, Typography, Grid } from '@mui/material';
+import { Box, Container, Typography, Grid, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 
 const FooterContainer = styled(Box)(({ theme }) => ({
   backgroundColor: '#000',
@@ -71,6 +73,18 @@ const CopyrightText = styled(Typography)(({ theme }) => ({
   },
 }));
 
+const SocialButton = styled(IconButton)(({ theme }) => ({
+  color: '#ccc',
+  marginRight: '8px',
+  '&:hover': {
+    color: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  [theme.breakpoints.down('sm')]: {
+    marginRight: '4px',
+  },
+}));
+
 const Footer = () => {
   return (
     <FooterContainer>
@@ -78,11 +92,63 @@ const Footer = () => {
         <Grid container spacing={{ xs: 3, sm: 4, md: 4 }}>
           <Grid item xs={12} md={4}>
             <FooterTitle variant="h5">
-              WITNESS FILMS
+              WITNESS-FILMS
             </FooterTitle>
-            <FooterSubtitle variant="body1">
+                                    <FooterSubtitle variant="body1">
               Transforming Musical Visions into Visual Stories
             </FooterSubtitle>
+            <Box sx={{ textAlign: 'center', mt: 1 }}>
+              <Typography variant="body2" sx={{ 
+                color: '#ccc',
+                mb: 1
+              }}>
+                Follow Us On:
+              </Typography>
+              <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center' }}>
+                <a 
+                  href="https://www.instagram.com/wit.nessfilms/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <SocialButton 
+                    aria-label="Instagram" 
+                    sx={{ 
+                      p: 1,
+                      margin: 0,
+                      color: '#ccc',
+                      '&:hover': {
+                        color: '#fff',
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                      }
+                    }}
+                  >
+                    <InstagramIcon sx={{ fontSize: '2rem' }} />
+                  </SocialButton>
+                </a>
+                <a 
+                  href="#" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <SocialButton 
+                    aria-label="YouTube" 
+                    sx={{ 
+                      p: 1,
+                      margin: 0,
+                      color: '#ccc',
+                      '&:hover': {
+                        color: '#fff',
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                      }
+                    }}
+                  >
+                    <YouTubeIcon sx={{ fontSize: '2rem' }} />
+                  </SocialButton>
+                </a>
+              </Box>
+            </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <FooterSectionTitle variant="h6">
@@ -125,6 +191,7 @@ const Footer = () => {
               Location: Offgrid Studios, Jakhan, Dehradun, India
             </FooterText>
           </Grid>
+
         </Grid>
         <Box sx={{ 
           borderTop: '1px solid #333', 

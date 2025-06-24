@@ -110,10 +110,10 @@ const Contact = () => {
         `Email: ${formData.email}\n` +
         `Subject: ${formData.subject}\n\n` +
         `Message:\n${formData.message}\n\n` +
-        `---\nSent from Witness Films website contact form`
+        `---\nSent from Witness-Films website contact form`
       );
       
-      const mailtoLink = `mailto:satyam3196@gmail.com?subject=${subject}&body=${body}`;
+      const mailtoLink = `mailto:info@witness-films.com?subject=${subject}&body=${body}`;
       
       // Open email client
       window.location.href = mailtoLink;
@@ -171,7 +171,7 @@ const Contact = () => {
                 </InfoText>
                 <Box sx={{ my: { xs: 3, md: 4 } }}>
                   <InfoText variant="body1" paragraph>
-                    <strong>Email:</strong> info@witnessfilms.com
+                    <strong>Email:</strong> info@witness-films.com
                   </InfoText>
                   <InfoText variant="body1" paragraph>
                     <strong>Phone:</strong> +91-9627627886

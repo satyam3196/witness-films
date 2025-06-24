@@ -96,6 +96,16 @@ const teamMembers: TeamMember[] = [
     name: "Shubham Sharma",
     role: "Creative Director",
     imageUrl: "/images/shubham.jpg"
+  },
+  {
+    name: "Shubham Kumar",
+    role: "Production Head",
+    imageUrl: "/images/shubhamk.jpg"
+  },
+  {
+    name: "Yuvraj Rawat",
+    role: "Editor and Director",
+    imageUrl: "/images/yuvraj.jpg"
   }
 ];
 
@@ -112,9 +122,9 @@ const Team: React.FC = () => {
           <PageTitle variant="h2" align="center">
             Our Team
           </PageTitle>
-          <TeamGrid container spacing={{ xs: 3, sm: 3, md: 2 }} justifyContent="center">
+          <TeamGrid container spacing={{ xs: 3, sm: 4, md: 3, lg: 4 }} justifyContent="center">
             {teamMembers.map((member, index) => (
-              <Grid item xs={12} sm={6} md={6} key={index}>
+              <Grid item xs={12} sm={6} md={4} lg={4} key={index}>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
