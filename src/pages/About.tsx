@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { Container, Typography, Grid, Box } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Container, Typography, Grid, Box, Modal, IconButton } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
+import CloseIcon from '@mui/icons-material/Close';
 import Footer from '../components/Footer';
 
 const Section = styled(Box)(({ theme }) => ({
@@ -42,18 +43,60 @@ const CollaborationSection = styled(Box)(({ theme }) => ({
 }));
 
 const ServiceCard = styled(Box)(({ theme }) => ({
-  padding: '24px',
+  padding: '30px 20px',
   backgroundColor: 'white',
-  borderRadius: '8px',
-  height: '100%',
-  boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-  transition: 'transform 0.3s ease',
+  borderRadius: '12px',
+  height: '160px',
+  boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+  transition: 'all 0.3s ease',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  textAlign: 'center',
   '&:hover': {
-    transform: 'translateY(-4px)',
+    transform: 'translateY(-8px)',
+    boxShadow: '0 8px 30px rgba(0,0,0,0.15)',
+  },
+  [theme.breakpoints.down('md')]: {
+    height: '140px',
+    padding: '25px 18px',
   },
   [theme.breakpoints.down('sm')]: {
-    padding: '20px',
+    height: '120px',
+    padding: '18px 14px',
     marginBottom: '16px',
+  },
+}));
+
+const ModalBox = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '90%',
+  maxWidth: '700px',
+  maxHeight: '80vh',
+  backgroundColor: 'white',
+  borderRadius: '16px',
+  padding: '40px',
+  outline: 'none',
+  boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
+  overflow: 'auto',
+  [theme.breakpoints.down('sm')]: {
+    width: '95%',
+    padding: '30px 20px',
+    maxHeight: '85vh',
+  },
+}));
+
+const CloseButton = styled(IconButton)(({ theme }) => ({
+  position: 'absolute',
+  top: '16px',
+  right: '16px',
+  backgroundColor: '#f5f5f5',
+  '&:hover': {
+    backgroundColor: '#e0e0e0',
   },
 }));
 
@@ -118,22 +161,11 @@ const ColabOverlay = styled(Box)(({ theme }) => ({
   },
 }));
 
-const ArtistItem = styled(Typography)(({ theme }) => ({
-  padding: '12px',
-  backgroundColor: '#f8f9fa',
-  borderRadius: '8px',
-  textAlign: 'center',
-  transition: 'background-color 0.3s ease',
-  '&:hover': {
-    backgroundColor: '#e9ecef',
-  },
-  [theme.breakpoints.down('sm')]: {
-    padding: '10px',
-    fontSize: '0.95rem',
-  },
-}));
+
 
 const About = () => {
+  const [selectedService, setSelectedService] = useState<any>(null);
+
   const collaborations = [
     { id: 1, title: 'Sony Music India', image: '/images/sony_music.jpg' },
     { id: 2, title: 'Universal Music Group', image: '/images/universal_music.jpg' },
@@ -143,19 +175,193 @@ const About = () => {
     { id: 6, title: 'Zerodha', image: '/images/zerodha.png' },
   ];
 
-  const artists = [
-    'Yung Sammy',
-    'Panther',
-    'Raga',
-    'Aditya Bhardwaj',
-    'Flyboy',
-    'Jubin',
-    'Kushagra Thakur',
-    'Vichar',
-    'Urban Poet',
+
+
+  const services = [
+    {
+      title: 'Concept Development',
+      description: `1. Understanding the Song
+• Lyrics & Mood: Analyzing the message, tone, and emotion of the track.
+• Genre & Artist's Identity: Matching visuals to the style and brand of the artist.
+
+2. Brainstorming Ideas
+• Creative sessions to generate visual interpretations of the song:
+• Is it narrative, performance-based, conceptual, abstract, or cinematic?
+• Mood board or references are often created at this stage.
+
+3. Theme & Storyline Development
+• Turning raw ideas into a structured concept:
+• What's the story or vibe?
+• Are there characters or a visual metaphor?
+• Does it evolve or stay static?
+
+4. Visual Treatment
+• A treatment deck or lookbook is prepared:
+• Describes the visual tone (lighting, color palette, costume, locations)
+• Contains reference images, rough storyboard, shot ideas
+• Helps communicate the vision to the artist and crew
+
+5. Feasibility & Execution Planning
+• Budget, location access, equipment, and time constraints are considered.
+• Creative tweaks are made to fit logistics without compromising the essence.`
+    },
+    {
+      title: 'Filming',
+      description: `1. Setup
+• Location prep: Art direction, set design, lighting setups.
+• Camera setups: Tripods, gimbals, cranes, drones, etc.
+• Gear checks: Cameras, lenses, memory, audio sync (if needed), lights.
+
+2. Blocking
+• Director and DOP (Director of Photography) rehearse with the artist/actors:
+• Define movements, camera angles, performance energy.
+• Helps align choreography, expressions, and camera timing.
+
+3. Shooting Scenes
+• Performance shots: Artist lip-syncs or performs to playback music.
+• Narrative shots: Actors or the artist act out a storyline or scene.
+• B-roll: Creative or atmospheric visuals to enhance storytelling.
+
+Shots are done from multiple angles for flexibility in editing:
+• Wide / Establishing
+• Mid-shots
+• Close-ups
+• Creative camera moves (dolly, handheld, drone, etc.)
+
+4. Lighting and Mood
+• Cinematic lighting sets the tone and mood: soft, dramatic, neon, natural.
+• Different scenes may require different setups.
+
+5. Audio Playback
+• The track is played out loud so performers can sync their lip movements.
+• Playback is always at full resolution and BPM to avoid mismatch.
+
+6. On-Set Direction
+• Director guides performance energy, expression, and movement.
+• DOP ensures the framing, exposure, and movement are perfect.
+
+7. Multiple Takes
+• Same scenes are shot multiple times for safety and variation.
+• Often shot out of sequence depending on light, location, or artist availability.`
+    },
+    {
+      title: 'Post Production',
+      description: `1. Editing (Initial Step)
+• Ingesting & Organizing Footage
+• Import and back up all footage.
+• Organize into folders (performance shots, B-roll, narrative, etc.).
+• Label takes, mark best shots (also called "selects").
+
+2. Syncing to Music
+• Match performance footage to the music track.
+• Use markers or waveform peaks to line up lip-sync accurately.
+
+3. Rough Cut
+• Lay down the basic sequence of the video.
+• Choose best takes, arrange in the timeline.
+• Establish pacing, shot flow, and story structure.
+
+4. Fine Cut
+• Refine transitions, rhythm, and timing with the music.
+• Add cutaways, insert B-roll, or dynamic movement.
+• Make creative decisions—speed ramps, zooms, overlays, etc.
+
+2. Color Correction & Color Grading
+• Color correction: Balances the lighting, white balance, and exposure across all shots to maintain consistency.
+• Color grading: Adds a stylistic tone to match the concept or mood (e.g., warm vintage, cold urban, high-contrast).
+
+3. Visual Effects (VFX) & Motion Graphics
+• Adding creative enhancements like:
+• Glitch effects, flares, light leaks, fire, smoke, slow motion
+• Compositing elements (e.g., sky replacement, screen replacements)
+• Animated text or motion graphics
+• Can be minimal or heavy depending on concept.
+
+4. Titles, Lyrics & Subtitles (Optional)
+• Add:
+• Opening/closing titles
+• Credits (Director, DOP, Production House)
+• On-screen lyrics (for lyrical videos or subtitled versions)
+• Branding logos or watermarks
+
+5. Audio Finalization
+• Ensuring the final video uses the mastered version of the track.
+• Add ambience, foley, or transitional sounds if needed (only in cinematic or storytelling MVs).
+• Sync double-check to ensure lip movement matches audio.
+
+6. Master Export
+• Final video is rendered/exported in different formats based on platform:
+• 4K for YouTube
+• Square or vertical for Instagram
+• Light versions for reels/stories
+• Export with correct bitrate, color profile, and compression to avoid quality loss.
+
+7. Backup & Delivery
+• Organize and backup:
+• Final project files
+• Raw footage
+• Exported versions
+• Artwork or poster files
+• Deliver to client or label, often via drive links or physical storage.`
+    },
+    {
+      title: 'Marketing',
+      description: `1. Marketing the Music Video Itself (If you're involved in release strategy)
+
+Pre-Release Strategy
+• Teasers & Posters: Share sneak peeks 3–7 days before launch.
+• Behind-the-scenes (BTS): Short reels or photo carousels that build hype.
+• Countdown posts on Instagram or YouTube community tab.
+
+Launch Strategy
+• YouTube Premiere: Schedule the video with a countdown.
+• Share the YouTube link in advance across platforms.
+• Cross-post on the artist's pages, label pages, and yours.
+• Use hashtags + location tags smartly for discovery.
+• Ask friends/fans to comment, share, and engage early (boosts algorithm).
+
+Post-Release Push
+• Post highlight reels, cinematic shots, or transitions from the video.
+• Drop a "Director's Cut", an alternate edit, or fan edits.
+• Encourage user-generated content (UGC) like dance challenges, covers, etc.
+• Submit to music blogs, Instagram music curators, or YouTube channels that feature indie videos.
+
+2. Marketing Your Production House
+
+Brand Yourself Creatively
+• Use a consistent logo, color scheme, and tone across all platforms.
+• Create a portfolio site or Instagram page that clearly shows:
+• Highlight reels
+• Still frames/posters
+• BTS content
+• Client testimonials
+
+Use Social Media Strategically
+• Share before-and-after edits, breakdowns, or shot setups.
+• Post client shout-outs when a music video crosses a milestone.
+• Share director's commentary or concept decks.
+• Reuse every project across multiple formats (Reels, YouTube Shorts, IGTV).
+
+Build Relationships
+• Collaborate with indie artists, stylists, choreographers, and cinematographers.
+• Offer free or discounted test shoots for promising talent to build reputation.
+• Join online communities (Instagram, Discords, Reddit, Facebook groups) focused on music video production, indie music, and short films.
+
+Promotion Channels
+• Instagram, YouTube, and LinkedIn (for networking)
+• Behance or Vimeo (for a high-end creative portfolio)
+• Google My Business and Maps (for local search visibility)
+• Music video contests and festivals`
+    }
   ];
 
-  const services = ['Concept Development', 'Filming', 'Editing', 'Post Production', 'Marketing'];
+  const handleServiceClick = (service: any) => {
+    setSelectedService(service);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedService(null);
+  };
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -187,22 +393,24 @@ const About = () => {
           <SectionTitle variant="h3">
             Our Services
           </SectionTitle>
-          <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
-            {services.map((service) => (
-              <Grid item xs={12} sm={6} md={4} key={service}>
+          <Grid container spacing={{ xs: 3, sm: 4, md: 5 }} justifyContent="center">
+            {services.map((service, index) => (
+              <Grid item xs={12} sm={6} md={6} key={service.title}>
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={() => handleServiceClick(service)}
                 >
                   <ServiceCard>
                     <Typography 
-                      variant="h5" 
+                      variant="h4" 
                       sx={{ 
                         fontWeight: 'bold',
-                        fontSize: { xs: '1.25rem', sm: '1.5rem' }
+                        fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' },
+                        color: '#333'
                       }}
                     >
-                      {service}
+                      {service.title}
                     </Typography>
                   </ServiceCard>
                 </motion.div>
@@ -211,6 +419,47 @@ const About = () => {
           </Grid>
         </Container>
       </CollaborationSection>
+
+      {/* Service Modal */}
+      <Modal
+        open={!!selectedService}
+        onClose={handleCloseModal}
+        aria-labelledby="service-modal-title"
+        aria-describedby="service-modal-description"
+      >
+        <ModalBox>
+          <CloseButton onClick={handleCloseModal}>
+            <CloseIcon />
+          </CloseButton>
+          <Typography 
+            id="service-modal-title" 
+            variant="h4" 
+            component="h2" 
+            sx={{ 
+              mb: 3, 
+              fontWeight: 'bold',
+              color: '#333',
+              fontSize: { xs: '1.75rem', md: '2rem' }
+            }}
+          >
+            {selectedService?.title}
+          </Typography>
+          <Typography 
+            id="service-modal-description" 
+            component="pre"
+            sx={{ 
+              fontSize: { xs: '0.9rem', sm: '1rem' },
+              lineHeight: 1.6,
+              color: '#555',
+              textAlign: 'left',
+              whiteSpace: 'pre-wrap',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+            }}
+          >
+            {selectedService?.description}
+          </Typography>
+        </ModalBox>
+      </Modal>
 
       <Section>
         <Container>
@@ -242,27 +491,7 @@ const About = () => {
         </Container>
       </Section>
 
-      <Section>
-        <Container>
-          <SectionTitle variant="h3">
-            Artists We've Worked With
-          </SectionTitle>
-          <Grid container spacing={{ xs: 2, sm: 3, md: 3 }}>
-            {artists.map((artist) => (
-              <Grid item xs={12} sm={6} md={4} key={artist}>
-                <motion.div 
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <ArtistItem variant="h6">
-                    {artist}
-                  </ArtistItem>
-                </motion.div>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </Section>
+
       <Footer />
     </motion.div>
   );

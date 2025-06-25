@@ -182,10 +182,10 @@ const Footer = () => {
               Contact Info
             </FooterSectionTitle>
             <FooterText variant="body2">
-              Email: info@witness-films.com
+              Email: filmswitness@gmail.com
             </FooterText>
             <FooterText variant="body2">
-              Phone: +91-9627627886
+              Phone: +91-7055519939 / +91-9627627886
             </FooterText>
             <FooterText variant="body2">
               Location: Offgrid Studios, Jakhan, Dehradun, India

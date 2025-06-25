@@ -5,51 +5,117 @@ import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
 import Footer from '../components/Footer';
 
-const HeroSection = styled(Box)(({ theme }) => ({
+const CollageSection = styled(Box)(({ theme }) => ({
   height: '100vh',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(8, 1fr)',
+  gridTemplateRows: 'repeat(4, 1fr)',
+  gap: '2px',
+  backgroundColor: '#000',
+  overflow: 'hidden',
+  [theme.breakpoints.down('md')]: {
+    gridTemplateColumns: 'repeat(6, 1fr)',
+    gridTemplateRows: 'repeat(5, 1fr)',
+    height: '80vh',
+  },
+  [theme.breakpoints.down('sm')]: {
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    gridTemplateRows: 'repeat(6, 1fr)',
+    height: '70vh',
+    gap: '1px',
+  },
+}));
+
+const CollageImageContainer = styled(motion.div)({
+  position: 'relative',
+  width: '100%',
+  height: '100%',
+  overflow: 'hidden',
+  cursor: 'pointer',
+});
+
+const CollageImage = styled(motion.img)(({ theme }) => ({
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  transition: 'all 0.8s ease',
+  '&:hover': {
+    transform: 'scale(1.1)',
+  },
+}));
+
+const ImageGradient = styled(Box)({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  background: 'linear-gradient(45deg, rgba(0,0,0,0.3) 0%, transparent 50%, rgba(0,0,0,0.2) 100%)',
+  pointerEvents: 'none',
+  transition: 'opacity 0.8s ease',
+  '&:hover': {
+    opacity: 0.7,
+  },
+});
+
+const CenterLogo = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '#000',
-  color: '#fff',
-  position: 'relative',
-  padding: '0 20px',
-  textAlign: 'center',
+  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  padding: '20px',
+  gridColumn: '4 / 6',
+  gridRow: '2 / 4',
+  borderRadius: '10px',
   [theme.breakpoints.down('md')]: {
-    height: '80vh',
-    padding: '0 16px',
+    gridColumn: '3 / 5',
+    gridRow: '2 / 4',
+    padding: '15px',
   },
   [theme.breakpoints.down('sm')]: {
-    height: '70vh',
-    padding: '0 12px',
+    gridColumn: '2 / 4',
+    gridRow: '3 / 5',
+    padding: '10px',
   },
 }));
 
-const HeroTitle = styled(Typography)(({ theme }) => ({
-  fontSize: '4rem',
+const LogoImage = styled('img')(({ theme }) => ({
+  width: '100%',
+  height: 'auto',
+  maxWidth: '400px',
+  objectFit: 'contain',
+  filter: 'brightness(1.1)',
+  [theme.breakpoints.down('md')]: {
+    maxWidth: '350px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    maxWidth: '250px',
+  },
+}));
+
+const LogoTitle = styled(Typography)(({ theme }) => ({
+  fontSize: '2rem',
   fontWeight: 'bold',
-  marginBottom: '1rem',
+  marginBottom: '0.3rem',
+  letterSpacing: '2px',
   [theme.breakpoints.down('md')]: {
-    fontSize: '3rem',
+    fontSize: '1.6rem',
   },
   [theme.breakpoints.down('sm')]: {
-    fontSize: '2.5rem',
-  },
-  [theme.breakpoints.down('xs')]: {
-    fontSize: '2rem',
+    fontSize: '1.2rem',
+    letterSpacing: '1px',
   },
 }));
 
-const HeroSubtitle = styled(Typography)(({ theme }) => ({
-  fontSize: '1.5rem',
+const LogoSubtitle = styled(Typography)(({ theme }) => ({
+  fontSize: '0.7rem',
+  opacity: 0.8,
+  letterSpacing: '1px',
   [theme.breakpoints.down('md')]: {
-    fontSize: '1.25rem',
+    fontSize: '0.6rem',
   },
   [theme.breakpoints.down('sm')]: {
-    fontSize: '1.1rem',
-  },
-  [theme.breakpoints.down('xs')]: {
-    fontSize: '1rem',
+    fontSize: '0.5rem',
   },
 }));
 
@@ -201,30 +267,130 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Shuffle function
+  const shuffleArray = (array: number[]) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  // Generate array of photo numbers (1-32, you can add up to 32)
+  const [collagePhotos, setCollagePhotos] = React.useState(() => 
+    shuffleArray(Array.from({ length: 32 }, (_, i) => i + 1))
+  );
+  
+  // Get grid size and center positions based on screen size
+  const getGridConfig = () => {
+    if (window.innerWidth <= 600) { // sm breakpoint
+      return {
+        totalPositions: 24, // 4x6 grid
+        centerPositions: new Set([10, 11, 14, 15]), // Center 2x2 in 4x6 grid
+        centerPosition: 10
+      };
+    } else if (window.innerWidth <= 900) { // md breakpoint
+      return {
+        totalPositions: 30, // 6x5 grid
+        centerPositions: new Set([14, 15, 20, 21]), // Center 2x2 in 6x5 grid
+        centerPosition: 14
+      };
+    } else {
+      return {
+        totalPositions: 32, // 8x4 grid
+        centerPositions: new Set([12, 13, 20, 21]), // Center 2x2 in 8x4 grid
+        centerPosition: 12
+      };
+    }
+  };
+
+  const [gridConfig, setGridConfig] = React.useState(getGridConfig());
+
+  // Shuffle photos every 8 seconds
+  React.useEffect(() => {
+    const shuffleInterval = setInterval(() => {
+      setCollagePhotos(prev => shuffleArray(prev));
+    }, 8000); // Change every 8 seconds
+
+    return () => clearInterval(shuffleInterval);
+  }, []);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setGridConfig(getGridConfig());
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
+  // Filter out center positions for photos
+  let photoIndex = 0;
+  const getPhotoForPosition = (position: number) => {
+    if (gridConfig.centerPositions.has(position)) {
+      return null; // This position is for the logo
+    }
+    return collagePhotos[photoIndex++];
+  };
+
   return (
     <Box>
-      <HeroSection>
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <HeroTitle variant="h1">
-              WITNESS-FILMS
-            </HeroTitle>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <HeroSubtitle variant="h4">
-              Transforming Musical Visions into Visual Stories
-            </HeroSubtitle>
-          </motion.div>
-        </Container>
-      </HeroSection>
+            <CollageSection>
+        {Array.from({ length: gridConfig.totalPositions }, (_, index) => {
+          const position = index + 1;
+          const photoNumber = getPhotoForPosition(position);
+          
+          if (photoNumber === null) {
+            // This is part of the center logo area, but we'll handle it differently
+            if (position === gridConfig.centerPosition) { // Show logo only once in the center (first center position)
+              return (
+                <CenterLogo key="logo">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1.5, delay: 0.8 }}
+                  >
+                    <LogoImage 
+                      src="/logo192.png" 
+                      alt="Witness Films Logo"
+                    />
+                  </motion.div>
+                </CenterLogo>
+              );
+            }
+            return null; // Other center positions are empty
+          }
+
+          return (
+            <motion.div
+              key={`photo-${photoNumber}`}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ 
+                duration: 1.2, 
+                delay: Math.random() * 0.6 // Slower, more spread out delays
+              }}
+              layout // This enables smooth position transitions
+            >
+              <CollageImageContainer
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.5 }}
+              >
+                <CollageImage
+                  src={`/collage/${photoNumber}.jpg`}
+                  alt={`Collage photo ${photoNumber}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                />
+                <ImageGradient />
+              </CollageImageContainer>
+            </motion.div>
+          );
+        })}
+      </CollageSection>
 
       <Container>
         <MainContent>

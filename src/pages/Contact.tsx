@@ -113,7 +113,7 @@ const Contact = () => {
         `---\nSent from Witness-Films website contact form`
       );
       
-      const mailtoLink = `mailto:info@witness-films.com?subject=${subject}&body=${body}`;
+      const mailtoLink = `mailto:filmswitness@gmail.com?subject=${subject}&body=${body}`;
       
       // Open email client
       window.location.href = mailtoLink;
@@ -136,7 +136,7 @@ const Contact = () => {
     } catch (error) {
       setNotification({
         open: true,
-        message: 'There was an error. Please try again or contact us directly at satyam3196@gmail.com',
+        message: 'There was an error. Please try again or contact us directly at filmswitness@gmail.com',
         severity: 'error'
       });
     } finally {
@@ -171,10 +171,10 @@ const Contact = () => {
                 </InfoText>
                 <Box sx={{ my: { xs: 3, md: 4 } }}>
                   <InfoText variant="body1" paragraph>
-                    <strong>Email:</strong> info@witness-films.com
+                    <strong>Email:</strong> filmswitness@gmail.com
                   </InfoText>
                   <InfoText variant="body1" paragraph>
-                    <strong>Phone:</strong> +91-9627627886
+                    <strong>Phone:</strong> +91-7055519939 / +91-9627627886
                   </InfoText>
                   <InfoText variant="body1">
                     <strong>Address:</strong><br />
