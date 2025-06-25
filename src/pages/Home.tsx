@@ -93,31 +93,7 @@ const LogoImage = styled('img')(({ theme }) => ({
   },
 }));
 
-const LogoTitle = styled(Typography)(({ theme }) => ({
-  fontSize: '2rem',
-  fontWeight: 'bold',
-  marginBottom: '0.3rem',
-  letterSpacing: '2px',
-  [theme.breakpoints.down('md')]: {
-    fontSize: '1.6rem',
-  },
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '1.2rem',
-    letterSpacing: '1px',
-  },
-}));
 
-const LogoSubtitle = styled(Typography)(({ theme }) => ({
-  fontSize: '0.7rem',
-  opacity: 0.8,
-  letterSpacing: '1px',
-  [theme.breakpoints.down('md')]: {
-    fontSize: '0.6rem',
-  },
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '0.5rem',
-  },
-}));
 
 const PortfolioGrid = styled(Grid)(({ theme }) => ({
   padding: '40px 0',
