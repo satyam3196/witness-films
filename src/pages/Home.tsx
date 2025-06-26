@@ -329,7 +329,7 @@ const Home = () => {
                   >
                     <LogoImage 
                       src="/logo192.png" 
-                      alt="Witness Films Logo"
+                      alt="Witness-Films Logo"
                     />
                   </motion.div>
                 </CenterLogo>
@@ -401,7 +401,7 @@ const Home = () => {
           {/* Featured Colabs Section */}
           <Box sx={{ textAlign: 'center', mt: { xs: 6, md: 8 } }}>
             <SectionTitle variant="h3">
-              Featured Colabs
+              Featured Collaborations
             </SectionTitle>
             <SectionDivider />
           </Box>
