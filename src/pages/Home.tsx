@@ -231,8 +231,8 @@ const projects = [
 
 const colabs = [
   { id: 1, title: 'Sony Music India', image: '/images/sony_music.jpg' },
-  { id: 2, title: 'Universal Music Group', image: '/images/universal_music.jpg' },
-  { id: 3, title: 'Warner Music India', image: '/images/warner_music.jpg' },
+  { id: 2, title: 'Warner Music India', image: '/images/warner_music.jpg' },
+  { id: 3, title: 'Desi Trill', image: '/images/desi_trill.jpg' },
   { id: 4, title: 'Mass Appeal', image: '/images/mass_appeal.jpg' },
   //{ id: 4, title: 'T-Series', image: '/images/t-series.png' },
 ];

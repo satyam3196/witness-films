@@ -200,7 +200,7 @@ const Footer = () => {
           textAlign: 'center' 
         }}>
           <CopyrightText variant="body2">
-            © 2021 Witness-Films. All rights reserved.
+            © 2022 Witness-Films. All rights reserved.
           </CopyrightText>
         </Box>
       </Container>
