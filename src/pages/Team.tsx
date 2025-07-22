@@ -85,7 +85,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Rishabh Pandey",
     role: "Executive Producer",
-    imageUrl: "/images/pandu.jpg"
+    imageUrl: "/images/pandu.jpeg"
   },
   {
     name: "Yuvraj Rawat",

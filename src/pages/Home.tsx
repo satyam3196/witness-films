@@ -81,16 +81,9 @@ const CenterLogo = styled(Box)(({ theme }) => ({
 
 const LogoImage = styled('img')(({ theme }) => ({
   width: '100%',
-  height: 'auto',
-  maxWidth: '400px',
+  height: '100%',
   objectFit: 'contain',
   filter: 'brightness(1.1)',
-  [theme.breakpoints.down('md')]: {
-    maxWidth: '350px',
-  },
-  [theme.breakpoints.down('sm')]: {
-    maxWidth: '250px',
-  },
 }));
 
 
@@ -219,12 +212,13 @@ const MainContent = styled(Box)(({ theme }) => ({
 }));
 
 const projects = [
-  { id: 1, title: 'Don\'t Reckon', category: 'Music Video', image: '/images/dont_reckon.jpg' },
-  { id: 2, title: 'Top Boys', category: 'Music Video', image: '/images/top_boys.jpg' },
-  { id: 3, title: 'Mr. Rambo', image: '/images/rambo.jpg' },
-  { id: 4, title: 'Battak', image: '/images/battak.jpg' },
-  { id: 5, title: 'Ben 10', image: '/images/ben-10.jpg' },
-  { id: 8, title: 'Dard e dil', image: '/images/dard-e-dil.jpg' },
+  { id: 1, title: 'Ghost', category: 'Music Video', image: '/images/ghost.jpg' },
+  { id: 2, title: 'Don\'t Reckon', category: 'Music Video', image: '/images/dont_reckon.jpg' },
+  { id: 3, title: 'Top Boys', category: 'Music Video', image: '/images/top_boys.jpg' },
+  { id: 4, title: 'Mr. Rambo', image: '/images/rambo.jpg' },
+  { id: 5, title: 'Battak', image: '/images/battak.jpg' },
+  { id: 6, title: 'Ben 10', image: '/images/ben-10.jpg' },
+  //{ id: 7, title: 'Dard e dil', image: '/images/dard-e-dil.jpg' },
   //{ id: 7, title: 'Heavy', image: '/images/heavy.jpg' },
   // Add more projects here
 ];
