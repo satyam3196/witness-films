@@ -212,9 +212,10 @@ const MainContent = styled(Box)(({ theme }) => ({
 }));
 
 const projects = [
-  { id: 1, title: 'Ghost', category: 'Music Video', image: '/images/ghost.jpg' },
-  { id: 2, title: 'Don\'t Reckon', category: 'Music Video', image: '/images/dont_reckon.jpg' },
-  { id: 3, title: 'Top Boys', category: 'Music Video', image: '/images/top_boys.jpg' },
+  { id: 1, title: 'Mudda', category: 'Music Video', image: '/images/mudda.jpg' },
+  { id: 2, title: 'Ghost', category: 'Music Video', image: '/images/ghost.jpg' },
+  { id: 3, title: 'Don\'t Reckon', category: 'Music Video', image: '/images/dont_reckon.jpg' },
+  // { id: 3, title: 'Top Boys', category: 'Music Video', image: '/images/top_boys.jpg' },
   { id: 4, title: 'Mr. Rambo', image: '/images/rambo.jpg' },
   { id: 5, title: 'Battak', image: '/images/battak.jpg' },
   { id: 6, title: 'Ben 10', image: '/images/ben-10.jpg' },
