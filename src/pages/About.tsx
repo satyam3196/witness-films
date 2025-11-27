@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Typography, Grid, Box, Modal, IconButton } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Container, Typography, Grid, Box } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
-import CloseIcon from '@mui/icons-material/Close';
 import Footer from '../components/Footer';
 
 const Section = styled(Box)(({ theme }) => ({
@@ -61,37 +60,6 @@ const ServiceCard = styled(Box)(({ theme }) => ({
     height: '120px',
     padding: '18px 14px',
     marginBottom: '16px',
-  },
-}));
-
-const ModalBox = styled(Box)(({ theme }) => ({
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '90%',
-  maxWidth: '700px',
-  maxHeight: '80vh',
-  backgroundColor: 'white',
-  borderRadius: '16px',
-  padding: '40px',
-  outline: 'none',
-  boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
-  overflow: 'auto',
-  [theme.breakpoints.down('sm')]: {
-    width: '95%',
-    padding: '30px 20px',
-    maxHeight: '85vh',
-  },
-}));
-
-const CloseButton = styled(IconButton)(({ theme }) => ({
-  position: 'absolute',
-  top: '16px',
-  right: '16px',
-  backgroundColor: '#f5f5f5',
-  '&:hover': {
-    backgroundColor: '#e0e0e0',
   },
 }));
 
@@ -159,8 +127,6 @@ const ColabOverlay = styled(Box)(({ theme }) => ({
 
 
 const About = () => {
-  const [selectedService, setSelectedService] = useState<any>(null);
-
   const collaborations = [
     { id: 1, title: 'Sony Music India', image: '/images/sony_music.jpg' },
     { id: 2, title: 'Warner Music India', image: '/images/warner_music.jpg' },
@@ -350,14 +316,6 @@ Promotion Channels
     }
   ];
 
-  const handleServiceClick = (service: any) => {
-    setSelectedService(service);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedService(null);
-  };
-
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -414,47 +372,6 @@ Promotion Channels
           </Grid>
         </Container>
       </CollaborationSection>
-
-      {/* Service Modal */}
-      <Modal
-        open={!!selectedService}
-        onClose={handleCloseModal}
-        aria-labelledby="service-modal-title"
-        aria-describedby="service-modal-description"
-      >
-        <ModalBox>
-          <CloseButton onClick={handleCloseModal}>
-            <CloseIcon />
-          </CloseButton>
-          <Typography 
-            id="service-modal-title" 
-            variant="h4" 
-            component="h2" 
-            sx={{ 
-              mb: 3, 
-              fontWeight: 'bold',
-              color: '#333',
-              fontSize: { xs: '1.75rem', md: '2rem' }
-            }}
-          >
-            {selectedService?.title}
-          </Typography>
-          <Typography 
-            id="service-modal-description" 
-            component="pre"
-            sx={{ 
-              fontSize: { xs: '0.9rem', sm: '1rem' },
-              lineHeight: 1.6,
-              color: '#555',
-              textAlign: 'left',
-              whiteSpace: 'pre-wrap',
-              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-            }}
-          >
-            {selectedService?.description}
-          </Typography>
-        </ModalBox>
-      </Modal>
 
       <Section>
         <Container>
