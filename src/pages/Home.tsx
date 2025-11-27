@@ -214,7 +214,7 @@ const MainContent = styled(Box)(({ theme }) => ({
 const projects = [
   { id: 1, title: 'Mudda', category: 'Music Video', image: '/images/mudda.jpg' },
   { id: 2, title: 'Ghost', category: 'Music Video', image: '/images/ghost.jpg' },
-  { id: 3, title: 'Don\'t Reckon', category: 'Music Video', image: '/images/dont_reckon.jpg' },
+  { id: 25, title: 'BabyBoo', category: 'Music Video', image: '/images/babyboo.jpg' },
   // { id: 3, title: 'Top Boys', category: 'Music Video', image: '/images/top_boys.jpg' },
   { id: 4, title: 'Mr. Rambo', image: '/images/rambo.jpg' },
   { id: 5, title: 'Battak', image: '/images/battak.jpg' },
@@ -248,9 +248,9 @@ const Home = () => {
     return shuffled;
   };
 
-  // Generate array of photo numbers (1-32, you can add up to 32)
+  // Generate array of photo numbers (1-50)
   const [collagePhotos, setCollagePhotos] = React.useState(() => 
-    shuffleArray(Array.from({ length: 32 }, (_, i) => i + 1))
+    shuffleArray(Array.from({ length: 50 }, (_, i) => i + 1))
   );
   
   // Get grid size and center positions based on screen size

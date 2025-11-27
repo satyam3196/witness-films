@@ -174,7 +174,7 @@ const Contact = () => {
                     <strong>Email:</strong> filmswitness@gmail.com
                   </InfoText>
                   <InfoText variant="body1" paragraph>
-                    <strong>Phone:</strong> +91-7055519939 / +91-9627627886
+                    <strong>Phone:</strong> +91-8077002038
                   </InfoText>
                   <InfoText variant="body1">
                     <strong>Address:</strong><br />

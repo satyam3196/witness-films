@@ -68,6 +68,7 @@ const PageTitle = styled(Typography)(({ theme }) => ({
 }));
 
 const projects = [
+  { id: 25, title: 'BabyBoo', category: 'Music Video', image: '/images/babyboo.jpg' },
   { id: 1, title: 'Mudda', category: 'Music Video', image: '/images/mudda.jpg' },
   { id: 2, title: 'Ghost', category: 'Music Video', image: '/images/ghost.jpg' },
   { id: 3, title: 'Don\'t Reckon', category: 'Music Video', image: '/images/dont_reckon.jpg' },

@@ -49,15 +49,10 @@ const ServiceCard = styled(Box)(({ theme }) => ({
   height: '160px',
   boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
   transition: 'all 0.3s ease',
-  cursor: 'pointer',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   textAlign: 'center',
-  '&:hover': {
-    transform: 'translateY(-8px)',
-    boxShadow: '0 8px 30px rgba(0,0,0,0.15)',
-  },
   [theme.breakpoints.down('md')]: {
     height: '140px',
     padding: '25px 18px',
@@ -397,9 +392,9 @@ Promotion Channels
             {services.map((service, index) => (
               <Grid item xs={12} sm={6} md={6} key={service.title}>
                 <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                  onClick={() => handleServiceClick(service)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
                 >
                   <ServiceCard>
                     <Typography 

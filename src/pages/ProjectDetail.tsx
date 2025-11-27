@@ -212,7 +212,12 @@ const projects: Project[] = [
     id: 24,
     title: 'TOKE',
     youtubeUrl: 'https://www.youtube.com/watch?v=6DFUSJlntS4&list=PLK8ERQe_PgVIZzKUsSwRgoIGjhwceAbj_&index=19',
-  },  
+  },
+  {
+    id: 25,
+    title: 'BABYBOO',
+    youtubeUrl: 'https://www.youtube.com/watch?v=RdelID04oxU',
+  },
 ];
 
 const ProjectDetail = () => {

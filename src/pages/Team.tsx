@@ -88,6 +88,11 @@ const teamMembers: TeamMember[] = [
     imageUrl: "/images/pandu.jpeg"
   },
   {
+    name: "Akshat Talwar",
+    role: "Business and Strategy head",
+    imageUrl: "/images/akshat.jpg"
+  },
+  {
     name: "Yuvraj Rawat",
     role: "Director & Editor",
     imageUrl: "/images/yuvraj.jpg"
