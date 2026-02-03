@@ -1,5 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, Grid, Box, TextField, Button, Alert, Snackbar } from '@mui/material';
+import { 
+  Container, 
+  Typography, 
+  Grid, 
+  Box, 
+  TextField, 
+  Button, 
+  Alert, 
+  Snackbar, 
+  Radio, 
+  RadioGroup, 
+  FormControlLabel, 
+  FormControl, 
+  FormLabel,
+  Select,
+  MenuItem,
+  InputLabel,
+  Divider
+} from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
 import Footer from '../components/Footer';
@@ -26,6 +44,12 @@ const ContactInfo = styled(Box)(({ theme }) => ({
 
 const ContactForm = styled('form')(({ theme }) => ({
   '& .MuiTextField-root': {
+    marginBottom: '20px',
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: '16px',
+    },
+  },
+  '& .MuiFormControl-root': {
     marginBottom: '20px',
     [theme.breakpoints.down('sm')]: {
       marginBottom: '16px',
@@ -71,12 +95,31 @@ const InfoText = styled(Typography)(({ theme }) => ({
   },
 }));
 
+const SectionTitle = styled(Typography)(({ theme }) => ({
+  marginTop: '24px',
+  marginBottom: '16px',
+  fontWeight: 600,
+  color: theme.palette.primary.main,
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1rem',
+    marginTop: '20px',
+    marginBottom: '12px',
+  },
+}));
+
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    artistName: '',
     email: '',
-    subject: '',
-    message: '',
+    phone: '',
+    city: '',
+    songReleased: '',
+    songLink: '',
+    projectType: '',
+    visualReferences: '',
+    shootTimeline: '',
+    releaseMonth: '',
+    budgetRange: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [notification, setNotification] = useState({
@@ -90,7 +133,7 @@ const Contact = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | any) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -103,40 +146,42 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Create mailto link as fallback
-      const subject = encodeURIComponent(`Contact Form: ${formData.subject}`);
-      const body = encodeURIComponent(
-        `Name: ${formData.name}\n` +
-        `Email: ${formData.email}\n` +
-        `Subject: ${formData.subject}\n\n` +
-        `Message:\n${formData.message}\n\n` +
-        `---\nSent from Witness-Films website contact form`
-      );
-      
-      const mailtoLink = `mailto:filmswitness@gmail.com?subject=${subject}&body=${body}`;
-      
-      // Open email client
-      window.location.href = mailtoLink;
-      
-      // Show success message
-      setNotification({
-        open: true,
-        message: 'Email client opened! Please send the email from your email application.',
-        severity: 'success'
+      const response = await fetch('https://formspree.io/f/mgozdgeg', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      });
-      
+
+      if (response.ok) {
+        setNotification({
+          open: true,
+          message: 'Thank you! Your inquiry has been submitted successfully. We\'ll get back to you soon!',
+          severity: 'success'
+        });
+        
+        // Reset form
+        setFormData({
+          artistName: '',
+          email: '',
+          phone: '',
+          city: '',
+          songReleased: '',
+          songLink: '',
+          projectType: '',
+          visualReferences: '',
+          shootTimeline: '',
+          releaseMonth: '',
+          budgetRange: '',
+        });
+      } else {
+        throw new Error('Submission failed');
+      }
     } catch (error) {
       setNotification({
         open: true,
-        message: 'There was an error. Please try again or contact us directly at filmswitness@gmail.com',
+        message: 'There was an error submitting your inquiry. Please try again or contact us directly at filmswitness@gmail.com',
         severity: 'error'
       });
     } finally {
@@ -155,19 +200,227 @@ const Contact = () => {
       transition={{ duration: 0.8 }}
     >
       <ContactSection>
-        <Container>
+        <Container maxWidth="lg">
           <PageTitle variant="h2" align="center">
-            Contact Us
+            Music Video Inquiry
           </PageTitle>
 
           <Grid container spacing={{ xs: 4, md: 6 }}>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={8}>
+              <ContactForm onSubmit={handleSubmit}>
+                {/* Basic Identity Section */}
+                <SectionTitle variant="h6">
+                  1. Basic Identity
+                </SectionTitle>
+                
+                <TextField
+                  fullWidth
+                  label="Artist / Band Name"
+                  name="artistName"
+                  value={formData.artistName}
+                  onChange={handleChange}
+                  required
+                  size="medium"
+                />
+                
+                <TextField
+                  fullWidth
+                  label="Email Address"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  size="medium"
+                />
+                
+                <TextField
+                  fullWidth
+                  label="Phone / WhatsApp Number"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  size="medium"
+                />
+                
+                <TextField
+                  fullWidth
+                  label="City / Country"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  required
+                  size="medium"
+                />
+
+                <Divider sx={{ my: 3 }} />
+
+                {/* Music Context Section */}
+                <SectionTitle variant="h6">
+                  2. Music Context
+                </SectionTitle>
+
+                <FormControl component="fieldset" fullWidth required>
+                  <FormLabel component="legend" sx={{ mb: 1 }}>
+                    Is the song already released? *
+                  </FormLabel>
+                  <RadioGroup
+                    name="songReleased"
+                    value={formData.songReleased}
+                    onChange={handleChange}
+                  >
+                    <FormControlLabel 
+                      value="Yes" 
+                      control={<Radio />} 
+                      label="Yes" 
+                    />
+                    <FormControlLabel 
+                      value="No, upcoming release" 
+                      control={<Radio />} 
+                      label="No, upcoming release" 
+                    />
+                  </RadioGroup>
+                </FormControl>
+
+                <TextField
+                  fullWidth
+                  label="Link to the song / demo (SoundCloud / Drive / YouTube / Spotify)"
+                  name="songLink"
+                  value={formData.songLink}
+                  onChange={handleChange}
+                  size="medium"
+                  helperText="Optional, if available"
+                />
+
+                <FormControl fullWidth>
+                  <InputLabel id="project-type-label">What best describes this project? *</InputLabel>
+                  <Select
+                    labelId="project-type-label"
+                    name="projectType"
+                    value={formData.projectType}
+                    label="What best describes this project?"
+                    onChange={handleChange}
+                    required
+                  >
+                    <MenuItem value="Debut music video">Debut music video</MenuItem>
+                    <MenuItem value="Independent release">Independent release</MenuItem>
+                    <MenuItem value="Label-backed project">Label-backed project</MenuItem>
+                    <MenuItem value="Visualiser / performance film">Visualiser / performance film</MenuItem>
+                    <MenuItem value="Experimental / concept film">Experimental / concept film</MenuItem>
+                  </Select>
+                </FormControl>
+
+                <Divider sx={{ my: 3 }} />
+
+                {/* Visual References */}
+                <SectionTitle variant="h6">
+                  3. Visual References
+                </SectionTitle>
+
+                <TextField
+                  fullWidth
+                  label="Any visual references you love?"
+                  name="visualReferences"
+                  multiline
+                  rows={3}
+                  value={formData.visualReferences}
+                  onChange={handleChange}
+                  helperText="YouTube / Instagram / films / artists — optional"
+                  size="medium"
+                />
+
+                <Divider sx={{ my: 3 }} />
+
+                {/* Timeline */}
+                <SectionTitle variant="h6">
+                  4. When do you plan to shoot?
+                </SectionTitle>
+
+                <FormControl fullWidth>
+                  <InputLabel id="shoot-timeline-label">Shoot Timeline *</InputLabel>
+                  <Select
+                    labelId="shoot-timeline-label"
+                    name="shootTimeline"
+                    value={formData.shootTimeline}
+                    label="Shoot Timeline"
+                    onChange={handleChange}
+                    required
+                  >
+                    <MenuItem value="ASAP">ASAP</MenuItem>
+                    <MenuItem value="Within 2–4 weeks">Within 2–4 weeks</MenuItem>
+                    <MenuItem value="1–2 months">1–2 months</MenuItem>
+                    <MenuItem value="Just exploring ideas">Just exploring ideas</MenuItem>
+                  </Select>
+                </FormControl>
+
+                <Divider sx={{ my: 3 }} />
+
+                {/* Release Month */}
+                <SectionTitle variant="h6">
+                  5. Expected Release Month
+                </SectionTitle>
+
+                <TextField
+                  fullWidth
+                  label="Expected release month"
+                  name="releaseMonth"
+                  value={formData.releaseMonth}
+                  onChange={handleChange}
+                  size="medium"
+                  placeholder="e.g., March 2026"
+                />
+
+                <Divider sx={{ my: 3 }} />
+
+                {/* Budget Range */}
+                <SectionTitle variant="h6">
+                  6. Approximate Budget Range
+                </SectionTitle>
+
+                <FormControl fullWidth>
+                  <InputLabel id="budget-range-label">Budget Range (Optional)</InputLabel>
+                  <Select
+                    labelId="budget-range-label"
+                    name="budgetRange"
+                    value={formData.budgetRange}
+                    label="Budget Range (Optional)"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="">
+                      <em>Prefer not to say</em>
+                    </MenuItem>
+                    <MenuItem value="Under 2L">Under ₹2L</MenuItem>
+                    <MenuItem value="₹2L – ₹5L">₹2L – ₹5L</MenuItem>
+                    <MenuItem value="₹5L – ₹8L">₹5L – ₹8L</MenuItem>
+                    <MenuItem value="₹10L+">₹10L+</MenuItem>
+                  </Select>
+                </FormControl>
+
+                <Button
+                  variant="contained"
+                  type="submit"
+                  size="large"
+                  disabled={isSubmitting}
+                  sx={{ 
+                    mt: 4,
+                    py: { xs: 1.5, sm: 2 },
+                    px: { xs: 4, sm: 6 },
+                    fontSize: { xs: '0.9rem', sm: '1rem' }
+                  }}
+                >
+                  {isSubmitting ? 'Submitting...' : 'Submit Inquiry'}
+                </Button>
+              </ContactForm>
+            </Grid>
+
+            <Grid item xs={12} md={4}>
               <ContactInfo>
                 <InfoTitle variant="h5" gutterBottom>
                   Get in Touch
                 </InfoTitle>
                 <InfoText variant="body1" paragraph>
-                  We'd love to hear from you. Whether you're looking to create a music video, collaborate on a project, or just want to say hello, we're here to help.
+                  We'd love to hear about your music video project. Fill out the form and we'll get back to you within 24-48 hours.
                 </InfoText>
                 <Box sx={{ my: { xs: 3, md: 4 } }}>
                   <InfoText variant="body1" paragraph>
@@ -183,64 +436,7 @@ const Contact = () => {
                 </Box>
               </ContactInfo>
 
-              <ContactForm onSubmit={handleSubmit}>
-                <TextField
-                  fullWidth
-                  label="Name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  size="medium"
-                />
-                <TextField
-                  fullWidth
-                  label="Email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  size="medium"
-                />
-                <TextField
-                  fullWidth
-                  label="Subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  size="medium"
-                />
-                <TextField
-                  fullWidth
-                  label="Message"
-                  name="message"
-                  multiline
-                  rows={4}
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                />
-                <Button
-                  variant="contained"
-                  type="submit"
-                  size="large"
-                  disabled={isSubmitting}
-                  sx={{ 
-                    mt: 2,
-                    py: { xs: 1.5, sm: 2 },
-                    px: { xs: 3, sm: 4 },
-                    fontSize: { xs: '0.9rem', sm: '1rem' }
-                  }}
-                >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                </Button>
-              </ContactForm>
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <Box sx={{ height: '100%', minHeight: { xs: '300px', md: '400px' } }}>
+              <Box sx={{ mt: 4 }}>
                 <LocationMap
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.8234567891!2d78.0663120!3d30.3634370!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDIxJzQ4LjQiTiA3OMKwMDQnMDkuNSJF!5e0!3m2!1sen!2sin!4v1647856687721!5m2!1sen!2sin"
                   allowFullScreen
